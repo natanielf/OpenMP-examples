@@ -37,4 +37,6 @@ int main() {
         double speedup = seq_time / par_time;
         printf("Speedup: %.2fx\n", speedup);
     }
+
+    return 0;
 }

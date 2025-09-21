@@ -16,5 +16,6 @@ int main() {
     }
 
     printf("Final counter value  : %d\n", counter);
+
     return 0;
 }

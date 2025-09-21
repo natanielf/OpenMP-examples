@@ -55,4 +55,6 @@ int main() {
         }
         printf("Thread %d is finishing\n", thread_num);
     }
+
+    return 0;
 }
