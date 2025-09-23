@@ -22,6 +22,9 @@ int_par2 : int_par2.c
 int_serial : int_start.c
 	$(CC) $(CFLAGS) int_start.c -o int_start
 
+int_test : int_test.c
+	$(CC) $(CFLAGS) int_test.c -o int_test
+
 clean :
 	$(RM) $(TARGETS)
 .PHONY : clean
