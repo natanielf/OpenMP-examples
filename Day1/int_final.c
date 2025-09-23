@@ -1,3 +1,8 @@
+/* Fixes the leftover from int_par2 and gives two options:
+1. Create an array and have each thread right to a slot in the array
+2. Create a total sum variable that sums all the sums from each thread 
+*/
+
 #include <omp.h>
 #include <stdio.h>
 
@@ -7,8 +12,8 @@
 static long num_steps = 100000;
 double step;
 
-// array to hold the final sums of each thread
-double sum_arr[NUM_THREADS];
+// // array to hold the final sums of each thread
+// double sum_arr[NUM_THREADS];
 
 int main()
 {
@@ -23,11 +28,13 @@ int main()
 
 	int thread_count = omp_get_num_threads();
 	printf("Threads: %d\n", thread_count);
+
+	double total_sum = 0.0;
 	
 	#pragma omp parallel 
 	{
 		// Each thread gets their own sum and i variables
-		double sum = 0.0;
+		double thread_sum = 0.0;
 		int i;
 		int ID = omp_get_thread_num();
 		
@@ -50,20 +57,22 @@ int main()
 			// Midpoint Reimann sum
 			x = (i + 0.5) * step;
 			// Doing the calculation of the function
-			sum += 4.0 / (1.0 + x * x);
+			thread_sum += 4.0 / (1.0 + x * x);
 		}
-		// Once the loop is done, assign it to the respective buffer space
-		sum_arr[ID] = sum;
+		// Add to total sum after loop
+		total_sum += thread_sum;
+		// // Once the loop is done, assign it to the respective buffer space
+		// sum_arr[ID] = sum;
 	}
 
-	// Summing up all the partial sums
-	double sum = 0.0;
-	for (int i = 0; i < NUM_THREADS; i++) {
-		sum += sum_arr[i];
-	}
+	// // Summing up all the partial sums
+	// double sum = 0.0;
+	// for (int i = 0; i < NUM_THREADS; i++) {
+	// 	sum += sum_arr[i];
+	// }
 
 	// Multiply total sum by step to get approximation
-	pi = step * sum;
+	pi = step * total_sum;
 
 	printf("Return value: %f", pi);
 	return 0;

@@ -1,15 +1,17 @@
+/* Bad attempt at parallelization by just putting a parallel section but not changing any of the code. 
+This version will give variable outputs for pi which is not supposed to happen */
+
 #include <omp.h>
 #include <stdio.h>
 
 // Defining thread count for parallel sections
-#define NUM_THREADS 4
+#define NUM_THREADS 12
 
 int i;
 static long num_steps = 100000;
 double step;
 
 int main() {
-	// x is fine here since it gets overwritten regardless of the thread running
 	double x, pi, sum = 0.0;
 
 	// Integral from 0 to 1

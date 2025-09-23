@@ -1,3 +1,5 @@
+// Serial program of an integral calculation for (4 / (1 + x^2)) from 0 to 1
+
 #include <omp.h>
 #include <stdio.h>
 

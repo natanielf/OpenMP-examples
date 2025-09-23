@@ -1,14 +1,13 @@
+// This version will correctly calculate pi for thread counts that give a whole number when dividing
+
 #include <omp.h>
 #include <stdio.h>
 
 // Defining thread count for parallel sections
-#define NUM_THREADS 12
+#define NUM_THREADS 4 // Will fail for 12 threads
 
 static long num_steps = 100000;
 double step;
-
-// array to hold the final sums of each thread
-int sum_arr[NUM_THREADS];
 
 int main()
 {
@@ -30,20 +29,14 @@ int main()
 		int i;
 		int ID = omp_get_thread_num();
 		printf("ID: %d\n", ID);
-		for (i = (ID * (num_steps / NUM_THREADS)); i < ((ID + 1) * (num_steps / NUM_THREADS)); i++) {
+		long chunk = num_steps / NUM_THREADS;
+		for (i = (ID * chunk); i < ((ID + 1) * chunk); i++) {
 			// Midpoint Reimann sum
 			x = (i + 0.5) * step;
 			// Doing the calculation of the function
 			sum += 4.0 / (1.0 + x * x);
 		}
-		// Once the loop is done, assign it to the respective buffer space
-		sum_arr[ID] = sum;
 	}
-	// double sum = 0.0;
-	// // Summing up all the partial sums
-	// for (int i = 0; i < NUM_THREADS; i++) {
-	// 	sum += sum_arr[i];
-	// }
 	
 	// Multiply total sum by step to get approximation
 	pi = step * sum;
