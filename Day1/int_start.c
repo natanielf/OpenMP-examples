@@ -8,22 +8,22 @@ static long num_steps = 100000;
 double step;
 
 int main() {
-	double x, pi, sum = 0.0;
+    double x, pi, sum = 0.0;
 
-	// Integral from 0 to 1
-	step = 1.0 / (double) num_steps;
+    // Integral from 0 to 1
+    step = 1.0 / (double)num_steps;
 
-	for (i = 0; i < num_steps; i++) {
-		// Midpoint Reimann sum
-		x = (i + 0.5) * step;
-		// Doing the calculation of the function
-		sum = sum + 4.0 / (1.0 + x * x);
-	}
-	
-	// Multiply total sum by step to get approximation
-	pi = step * sum;
+    for (i = 0; i < num_steps; i++) {
+        // Midpoint Reimann sum
+        x = (i + 0.5) * step;
+        // Doing the calculation of the function
+        sum = sum + 4.0 / (1.0 + x * x);
+    }
 
-	printf("Return value: %f", pi);
+    // Multiply total sum by step to get approximation
+    pi = step * sum;
 
-	return 0;
+    printf("Return value: %f\n", pi);
+
+    return 0;
 }
