@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -fopenmp
 RM = rm -f
 
-TARGETS = helloworld int_final int_par1 int_par2 int_start
+TARGETS = helloworld int_final int_par1 int_par2 int_start int_test
 
 all : $(TARGETS)
 .PHONY : all
@@ -19,7 +19,7 @@ int_par1 : int_par1.c
 int_par2 : int_par2.c
 	$(CC) $(CFLAGS) int_par2.c -o int_par2
 
-int_serial : int_start.c
+int_start : int_start.c
 	$(CC) $(CFLAGS) int_start.c -o int_start
 
 int_test : int_test.c
