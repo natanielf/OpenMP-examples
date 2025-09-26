@@ -1,3 +1,5 @@
+// gcc -fopenmp matmul_benchmark.c -o matmul_benchmark
+
 #include <omp.h>
 #include <stdio.h>
 #include <stdlib.h>

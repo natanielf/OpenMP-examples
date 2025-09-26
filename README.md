@@ -1,6 +1,6 @@
 # OpenMP Examples
 
-OpenMP examples for CS 616.
+OpenMP examples for CS 616: High-Performance Computing.
 
 ## Lecture 1
 
@@ -15,7 +15,16 @@ OpenMP examples for CS 616.
 
 ## Additional Examples
 
-- `hello_world.c`
-- `loop_comparison.c`
-- `matmul_benchmark.c`
-- `critical_section.c`
+**[Extra](./Extra/)**
+
+- [hello_world.c](./Extra/hello_world.c)
+- [loop_comparison.c](./Extra/loop_comparison.c)
+- [matmul_benchmark.c](./Extra/matmul_benchmark.c)
+- [critical_section.c](./Extra/critical_section.c)
+
+## Group Members
+
+- Nataniel Farzan
+- Joel Escobar
+- Marco Costa
+- Tyler Lewis
