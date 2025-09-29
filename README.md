@@ -18,6 +18,7 @@ OpenMP examples for CS 616: High-Performance Computing.
 **[Day2](./Day2/)**
 
 - [critical_section.c](./Day2/critical_section.c)
+- [worksharing.c](./Day2/worksharing.c)
 
 ## Additional Examples
 
