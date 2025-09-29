@@ -13,6 +13,12 @@ OpenMP examples for CS 616: High-Performance Computing.
 - [int_final.c](./Day1/int_final.c)
 - [int_test.c](./Day1/int_test.c)
 
+## Lecture 2
+
+**[Day2](./Day2/)**
+
+- [critical_section.c](./Day2/critical_section.c)
+
 ## Additional Examples
 
 **[Extra](./Extra/)**
@@ -20,7 +26,6 @@ OpenMP examples for CS 616: High-Performance Computing.
 - [hello_world.c](./Extra/hello_world.c)
 - [loop_comparison.c](./Extra/loop_comparison.c)
 - [matmul_benchmark.c](./Extra/matmul_benchmark.c)
-- [critical_section.c](./Extra/critical_section.c)
 
 ## Group Members
 

@@ -13,8 +13,10 @@ int main() {
 
 #pragma omp parallel for num_threads(NUM_THREADS)
     for (int i = 0; i < N; i++) {
-#pragma omp critical // Without this line, the variable is subject to race conditions
-        counter++;
+#pragma omp critical // Without this line, the shared variable is subject to race conditions
+        {
+            counter++;
+        }
     }
 
     printf("Final counter value  : %d\n", counter);
