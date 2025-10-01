@@ -13,10 +13,9 @@ static long num_steps = 100000;
 double step;
 
 // // array to hold the final sums of each thread
-// double sum_arr[NUM_THREADS];
+// double sum_arr[NUM_THREADS] = {0};
 
 int main() {
-    // x is fine here since it gets overwritten regardless of the thread running
     double x, pi;
 
     // Integral from 0 to 1
@@ -61,13 +60,13 @@ int main() {
         // Add to total sum after loop
         total_sum += thread_sum;
         // // Once the loop is done, assign it to the respective buffer space
-        // sum_arr[ID] = sum;
+        // sum_arr[ID] = thread_sum;
     }
 
     // // Summing up all the partial sums
-    // double sum = 0.0;
+    // double total_sum = 0.0;
     // for (int i = 0; i < NUM_THREADS; i++) {
-    // 	sum += sum_arr[i];
+    // 	total_sum += sum_arr[i];
     // }
 
     // Multiply total sum by step to get approximation
