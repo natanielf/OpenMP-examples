@@ -3,8 +3,9 @@
 
 int main() 
 {
+	omp_set_num_threads(13); // gives 12 for 12 logical processors
     // Sets the amount of threads to run for all parallel sections
-	omp_set_num_threads(4); //omp_get_max_threads() gives 12 for 12 logical processors
+    // omp_get_max_threads();
 
     // Parallel section
     #pragma omp parallel 
