@@ -1,3 +1,9 @@
+/*
+This is the most correct form of synchronization using worksharing constructs
+and the reduction synchronization construct. Unlike int_nosync.c, this version
+does not have any false sharing
+*/
+
 #include <omp.h>
 #include <stdio.h>
 
@@ -7,11 +13,7 @@
 static long num_steps = 1000000000;
 double step;
 
-// // array to hold the final sums of each thread
-// double sum_arr[NUM_THREADS] = {0};
-
 int main() {
-    // x is fine here since it gets overwritten regardless of the thread running
     double pi;
 
     // Integral from 0 to 1
@@ -20,11 +22,8 @@ int main() {
     // Sets thread count for all parallel sections
     omp_set_num_threads(NUM_THREADS);
 
-    // int thread_count = omp_get_num_threads();
-    // printf("Threads: %d\n", thread_count);
-
     double total_sum = 0.0;
-
+       
     #pragma omp parallel for reduction(+:total_sum)
     for (long i = 0; i < num_steps; i++) {
         // Midpoint Reimann sum
