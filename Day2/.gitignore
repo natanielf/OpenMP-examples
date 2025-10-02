@@ -1,4 +1,7 @@
 critical_section
 worksharing
 int_sync
+int_critical
+int_falsefix
+int_nosync
 *.exe
