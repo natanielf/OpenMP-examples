@@ -1,3 +1,9 @@
+// Fibonacci Computation using OpenMP Tasks with Cutoff Strategy
+//
+// compile:  gcc -fopenmp recursion.c -o recursion
+//          clang -fopenmp recursion.c -o recursion
+// run:     OMP_NUM_THREADS=8 ./recursion
+
 #include <stdio.h>
 #include <omp.h>
 
@@ -17,16 +23,15 @@ long fib(int n) {
     return x + y;
 }
 
-int main() {
-    int n = 40;
+// Entry point function that can be called as a task
+long compute_fibonacci_task(int n) {
     long ans;
-
+    
     #pragma omp parallel
     {
-        #pragma omp single   // one thread seeds the recursion
+        #pragma omp single
         ans = fib(n);
     }
-
-    printf("fib(%d) = %ld\n", n, ans);
-    return 0;
+    
+    return ans;
 }

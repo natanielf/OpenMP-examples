@@ -1,0 +1,155 @@
+# Makefile for OpenMP Task Scheduling Demos
+# Build: make
+# Run all demos: make run-all
+# Clean: make clean
+
+CC = gcc
+CFLAGS = -O2 -Wall -Wextra -std=c99
+OPENMP_FLAGS = -fopenmp
+LDFLAGS = 
+
+# Demo programs
+DEMOS = basic_scheduling priority_scheduling dependency_scheduling priority_inversion live_visualization performance_comparison
+
+# Default target
+all: $(DEMOS)
+
+# Individual demo builds
+basic_scheduling: basic_scheduling.c
+	$(CC) $(CFLAGS) $(OPENMP_FLAGS) basic_scheduling.c -o basic_scheduling $(LDFLAGS)
+	@echo "✅ Basic scheduling demo built"
+
+priority_scheduling: priority_scheduling.c
+	$(CC) $(CFLAGS) $(OPENMP_FLAGS) priority_scheduling.c -o priority_scheduling $(LDFLAGS)
+	@echo "✅ Priority scheduling demo built"
+
+dependency_scheduling: dependency_scheduling.c
+	$(CC) $(CFLAGS) $(OPENMP_FLAGS) dependency_scheduling.c -o dependency_scheduling $(LDFLAGS)
+	@echo "✅ Dependency scheduling demo built"
+
+priority_inversion: priority_inversion.c
+	$(CC) $(CFLAGS) $(OPENMP_FLAGS) priority_inversion.c -o priority_inversion $(LDFLAGS)
+	@echo "✅ Priority inversion demo built"
+
+live_visualization: live_visualization.c
+	$(CC) $(CFLAGS) $(OPENMP_FLAGS) live_visualization.c -o live_visualization $(LDFLAGS)
+	@echo "✅ Live visualization demo built"
+
+performance_comparison: performance_comparison.c
+	$(CC) $(CFLAGS) $(OPENMP_FLAGS) performance_comparison.c -o performance_comparison $(LDFLAGS)
+	@echo "✅ Performance comparison demo built"
+
+# Run individual demos
+run-basic: basic_scheduling
+	@echo "🎬 Running Basic Scheduling Demo..."
+	@echo "=================================="
+	OMP_NUM_THREADS=3 ./basic_scheduling
+
+run-priority: priority_scheduling
+	@echo "🎬 Running Priority Scheduling Demo..."
+	@echo "====================================="
+	OMP_NUM_THREADS=2 ./priority_scheduling
+
+run-dependency: dependency_scheduling
+	@echo "🎬 Running Dependency Scheduling Demo..."
+	@echo "======================================="
+	OMP_NUM_THREADS=3 ./dependency_scheduling
+
+run-inversion: priority_inversion
+	@echo "🎬 Running Priority Inversion Demo..."
+	@echo "===================================="
+	OMP_NUM_THREADS=2 ./priority_inversion
+
+run-live: live_visualization
+	@echo "🎬 Running Live Visualization Demo..."
+	@echo "===================================="
+	OMP_NUM_THREADS=4 ./live_visualization
+
+run-performance: performance_comparison
+	@echo "🎬 Running Performance Comparison Demo..."
+	@echo "========================================"
+	./performance_comparison
+
+# Run all demos in sequence
+run-all: $(DEMOS)
+	@echo "🎬 Running All OpenMP Task Scheduling Demos"
+	@echo "==========================================="
+	@echo ""
+	@make run-basic
+	@echo ""
+	@make run-priority
+	@echo ""
+	@make run-dependency
+	@echo ""
+	@make run-inversion
+	@echo ""
+	@make run-live
+	@echo ""
+	@make run-performance
+	@echo ""
+	@echo "🎉 All demos completed!"
+
+# Test with different thread counts
+test-threads: basic_scheduling
+	@echo "🧪 Testing with different thread counts..."
+	@echo "=========================================="
+	@echo "2 threads:"
+	OMP_NUM_THREADS=2 ./basic_scheduling
+	@echo ""
+	@echo "4 threads:"
+	OMP_NUM_THREADS=4 ./basic_scheduling
+	@echo ""
+	@echo "8 threads:"
+	OMP_NUM_THREADS=8 ./basic_scheduling
+
+# Interactive demo mode
+interactive: live_visualization
+	@echo "🎮 Starting Interactive Demo Mode..."
+	@echo "Press Ctrl+C to stop"
+	@while true; do \
+		echo "Running live visualization..."; \
+		OMP_NUM_THREADS=4 ./live_visualization; \
+		echo "Press Enter to run again, Ctrl+C to exit"; \
+		read; \
+	done
+
+# Clean build artifacts
+clean:
+	rm -f $(DEMOS)
+	@echo "🧹 Cleaned all demo executables"
+
+# Show help
+help:
+	@echo "🎬 OpenMP Task Scheduling Demo Makefile"
+	@echo "======================================"
+	@echo ""
+	@echo "Available targets:"
+	@echo "  all              - Build all demo programs"
+	@echo "  run-basic        - Run basic scheduling demo"
+	@echo "  run-priority     - Run priority scheduling demo"
+	@echo "  run-dependency   - Run dependency scheduling demo"
+	@echo "  run-inversion    - Run priority inversion demo"
+	@echo "  run-live         - Run live visualization demo"
+	@echo "  run-performance  - Run performance comparison demo"
+	@echo "  run-all          - Run all demos in sequence"
+	@echo "  test-threads     - Test basic demo with different thread counts"
+	@echo "  interactive      - Run live demo in interactive mode"
+	@echo "  clean            - Remove all demo executables"
+	@echo "  help             - Show this help message"
+	@echo ""
+	@echo "Usage examples:"
+	@echo "  make                    # Build all demos"
+	@echo "  make run-all            # Run all demos"
+	@echo "  make run-live           # Run just the live demo"
+	@echo "  make test-threads       # Test with different thread counts"
+	@echo "  make interactive        # Interactive demo mode"
+
+# Debug build
+debug: CFLAGS += -g -DDEBUG
+debug: all
+
+# Release build (optimized)
+release: CFLAGS += -O3 -DNDEBUG
+release: all
+
+.PHONY: all clean help debug release run-all run-basic run-priority run-dependency run-inversion run-live run-performance test-threads interactive
