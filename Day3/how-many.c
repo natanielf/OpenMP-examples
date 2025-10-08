@@ -1,7 +1,7 @@
 #include <omp.h>
 #include <stdio.h>
 
-#define MAX_DEPTH 2
+#define MAX_DEPTH 3
 
 void recursive_task(int depth, int max_depth, int *task_count) {
     if (depth >= max_depth) return;
@@ -29,3 +29,6 @@ int main() {
     printf("Total tasks created: %d\n", task_count);
     return 0;
 }
+
+
+
