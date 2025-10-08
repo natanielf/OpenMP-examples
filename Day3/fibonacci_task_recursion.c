@@ -1,8 +1,4 @@
 // Fibonacci Computation using OpenMP Tasks with Cutoff Strategy
-//
-// compile:  gcc -fopenmp recursion.c -o recursion
-//          clang -fopenmp recursion.c -o recursion
-// run:     OMP_NUM_THREADS=8 ./recursion
 
 #include <stdio.h>
 #include <omp.h>
